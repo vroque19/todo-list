@@ -17,7 +17,8 @@ export const actions = {
   create: async({ cookies, request }) => {
     const data = await request.formData(); // returns a promise
     try {
-      db.createTodo(cookies.get('userid'), data.get('description'));
+      let test = db.createTodo(cookies.get('userid'), data.get('description'));
+      console.log(test);
     } catch (error: any){
         return fail(422, {
           description: data.get('description'),
@@ -28,6 +29,10 @@ export const actions = {
   delete: async({ cookies, request }) => {
     const data = await request.formData();
     db.deleteTodo(cookies.get('userid'), data.get('id'));
+  },
+  update: async({ cookies, request }) => {
+    const data = await request.formData();
+    db.updateTodo(cookies.get('userid'), data.get('description'), data.get('id'));
   }
 }
 

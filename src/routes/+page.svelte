@@ -1,5 +1,6 @@
 <script>
   let { data, form } = $props();
+  import TodoItem from '$lib/components/TodoItem.svelte';
 </script>
 
 <div class="bg-gray-900 text-white w-screen h-screen flex flex-col items-center p-8 space-y-10">
@@ -23,24 +24,12 @@
       />
 
     </label>
-    
   </form>
 
   <!-- Todo List -->
   <ul class="w-full max-w-md space-y-4">
     {#each data.todos as todo (todo.id)}
-      <li class="flex items-center justify-between bg-gray-800 rounded-sm">
-        <span class="inline-block align-middle text-lg ">{todo.description}</span>
-        <form action="?/delete" method="POST" class="">
-          <input type="hidden" name="id" value={todo.id} />
-          <button
-            type="submit"
-            class="bg-red-500 hover:bg-red-600 text-white font-bold px-3 py-5"
-            aria-label="Delete Todo"
-          >
-          </button>
-        </form>
-      </li>
+      <TodoItem item={todo}/>
     {/each}
   </ul>
 </div>

@@ -1,6 +1,6 @@
 // In a real app, this data would live in a database,
 // rather than in memory. But for now, we cheat.
-const db = new Map();
+const db = (new Map());
 
 export function getTodos(userid) {
 	if (!db.has(userid)) {
@@ -27,6 +27,12 @@ export function createTodo(userid, description) {
 	console.log(todos, userid);
 	console.log(description)
 	return todos;
+}
+
+export function updateTodo(userid, description, todoid) {
+	const todos = db.get(userid);
+	const index = todos.findIndex(todo => todo.id === todoid);
+	todos[index].description = description;
 }
 
 export function deleteTodo(userid, todoid) {
